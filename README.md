@@ -15,3 +15,5 @@ backend> npm init -y
 \backend> npm i express mongoose dotenv jsonwebtoken bcryptjs cookie-parser cloudinary socket.io
 
 PS D:\Studies\Git\React\LetzChat\backend> npm i nodemon -D
+
+Cloudinary
