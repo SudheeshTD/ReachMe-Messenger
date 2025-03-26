@@ -17,3 +17,17 @@ backend> npm init -y
 PS D:\Studies\Git\React\LetzChat\backend> npm i nodemon -D
 
 Cloudinary
+
+PS D:\Studies\Git\React\LetzChat> cd .\frontend\
+PS D:\Studies\Git\React\LetzChat\frontend> npm i react-router-dom react-hot-toast
+
+npm i -D daisyui@latest
+
+PS D:\Studies\Git\React\LetzChat\frontend> npm i axios zustand
+
+once u start calling backend from frontend
+
+backend> npm i cors
+
+
+Loader : frontend> npm i lucide-react
