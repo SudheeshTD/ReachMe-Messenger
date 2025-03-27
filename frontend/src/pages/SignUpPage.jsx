@@ -7,8 +7,7 @@ import {
   Lock,
   Mail,
   Loader2,
-  MessagesSquare,
-  Loader,
+  MessageSquare,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -53,7 +52,7 @@ const SignUpPage = () => {
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
               group-hover:bg-primary/20 transition-colors"
               >
-                <MessagesSquare className="size-6 text-primary" />
+                <MessageSquare className="size-6 text-primary" />
                 <div className="p-10 bg-gray-100"></div>
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
