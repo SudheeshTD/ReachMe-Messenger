@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -90,25 +91,84 @@ export const logout = (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { profilePic } = req.body;
-
     const userId = req.user._id;
 
     if (!profilePic) {
       return res.status(400).json({ message: "Profile Pic is required" });
     }
 
-    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    // Validate base64 image size before upload
+    const base64Size = (profilePic.length * 3) / 4;
+    const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+
+    if (base64Size > maxSizeInBytes) {
+      return res.status(413).json({
+        message: "Image size too large. Maximum 5MB allowed.",
+      });
+    }
+
+    // Add upload options to limit file size and type
+    const uploadOptions = {
+      folder: "profile_pics",
+      max_bytes: maxSizeInBytes,
+      allowed_formats: ["png", "jpg", "jpeg", "webp"],
+    };
+
+    const uploadResponse = await cloudinary.uploader.upload(
+      profilePic,
+      uploadOptions
+    );
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadResponse.secure_url },
       { new: true }
     );
-    res.status(200).json(updatedUser);
+
+    res.status(200).json({
+      _id: updatedUser._id,
+      fullName: updatedUser.fullName,
+      email: updatedUser.email,
+      profilePic: updatedUser.profilePic,
+    });
   } catch (error) {
-    console.log("Error in Update Profile");
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in Update Profile:", error);
+
+    if (error.http_code === 413) {
+      return res.status(413).json({
+        message: "File size too large. Maximum 5MB allowed.",
+      });
+    }
+
+    res.status(500).json({
+      message: "Internal Server Error",
+      error: process.env.NODE_ENV === "development" ? error.message : {},
+    });
   }
 };
+
+// export const updateProfile = async (req, res) => {
+//   try {
+//     const { profilePic } = req.body;
+
+//     const userId = req.user._id;
+
+//     if (!profilePic) {
+//       return res.status(400).json({ message: "Profile Pic is required" });
+//     }
+
+//     const uploadResponse = await cloudinary.uploader.upload(profilePic);
+//     const updatedUser = await User.findByIdAndUpdate(
+//       userId,
+//       { profilePic: uploadResponse.secure_url },
+//       { new: true }
+//     );
+//     res.status(200).json(updatedUser);
+//   } catch (error) {
+//     console.log("Error in Update Profile", error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
 
 export const checkAuth = (req, res) => {
   try {
