@@ -29,5 +29,6 @@ once u start calling backend from frontend
 
 backend> npm i cors
 
-
 Loader : frontend> npm i lucide-react
+
+frontend> npm i socket.io-client
