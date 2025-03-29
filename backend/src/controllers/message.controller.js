@@ -1,5 +1,7 @@
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js";
+import cloudinary from "../lib/cloudinary.js";
+
 export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
@@ -36,6 +38,10 @@ export const sendMessage = async (req, res) => {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
+
+    if (!receiverId) {
+      return res.status(400).json({ message: "Receiver ID is required" });
+    }
 
     let imageUrl;
     if (image) {
