@@ -9,15 +9,15 @@ const Sidebar = () => {
     useChatStore();
 
   const { onlineUsers } = useAuthStore();
-  //   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
+  const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
     getUsers();
   }, [getUsers]);
 
-  //   const filteredUsers = showOnlineOnly
-  //     ? users.filter((user) => onlineUsers.includes(user._id))
-  //     : users;
+  const filteredUsers = showOnlineOnly
+    ? users.filter((user) => onlineUsers.includes(user._id))
+    : users;
 
   if (isUsersLoading) return <SidebarSkeleton />;
 
@@ -29,7 +29,7 @@ const Sidebar = () => {
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
         {/* TODO: Online filter toggle */}
-        {/* div className="mt-3 hidden lg:flex items-center gap-2">
+        <div className="mt-3 hidden lg:flex items-center gap-2">
           <label className="cursor-pointer flex items-center gap-2">
             <input
               type="checkbox"
@@ -41,11 +41,11 @@ const Sidebar = () => {
           </label>
           <span className="text-xs text-zinc-500">
             ({onlineUsers.length - 1} online)
-          </span> */}
+          </span>
+        </div>
       </div>
-
       <div className="overflow-y-auto w-full py-3">
-        {users.map((user) => (
+        {filteredUsers.map((user) => (
           <button
             key={user._id}
             onClick={() => setSelectedUser(user)}
@@ -82,10 +82,10 @@ const Sidebar = () => {
             </div>
           </button>
         ))}
-        {/* 
+
         {filteredUsers.length === 0 && (
           <div className="text-center text-zinc-500 py-4">No online users</div>
-        )} */}
+        )}
       </div>
     </aside>
   );
