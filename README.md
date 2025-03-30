@@ -6,8 +6,9 @@
 
 ## 📬 Contact
 
-**Developer**: Sudheesh Thuralkalmakki Dharmappa Gowda  
-**GitHub**: [SudheeshTD](https://github.com/SudheeshTD)  
+**Developer**: Sudheesh Thuralkalmakki Dharmappa Gowda
+**LinkedIn**: [Sudheesh LinkedIn](https://www.linkedin.com/in/sudheeshtd/)  
+**GitHub**: [Sudheesh GitHub](https://github.com/SudheeshTD)  
 **Email**: [sudheeshtgowda@gmail.com]
 
 ---
