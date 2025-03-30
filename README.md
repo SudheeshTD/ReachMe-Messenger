@@ -32,3 +32,15 @@ backend> npm i cors
 Loader : frontend> npm i lucide-react
 
 frontend> npm i socket.io-client
+
+DEPLOYMENT
+
+LetzChat> npm init -y
+
+in backend pkg file: "start": "node src/index.js"
+
+In Build Command:
+
+1. Install all dependencies for backend
+2. Install all dependencies for Frontend
+3. Build APplication and Make react optimized for the Produxtion
