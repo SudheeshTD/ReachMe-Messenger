@@ -44,3 +44,5 @@ In Build Command:
 1. Install all dependencies for backend
 2. Install all dependencies for Frontend
 3. Build APplication and Make react optimized for the Produxtion
+
+LetzChat> openssl rand -base64 32 - to generate Secure JWT Secret
