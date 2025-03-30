@@ -1,9 +1,14 @@
 # Reach Me Messenger
 
-![License](https://img.shields.io/badge/License-MIT-blue)  
 [![Deployed on Render](https://img.shields.io/badge/Render-Deployed-2B66F6)](https://render.com)
 
 **Reach Me Messenger** is a secure, real-time chat application designed for seamless instant messaging and media sharing. Built with the MERN stack and WebSocket technology, it offers a dynamic user experience with robust security, customizable themes, and cloud-based image storage. Ideal for both personal and professional communication, the app ensures messages are delivered instantly while prioritizing user privacy and data protection.
+
+## 📬 Contact
+
+**Developer**: Sudheesh Thuralkalmakki Dharmappa Gowda  
+**GitHub**: [SudheeshTD](https://github.com/SudheeshTD)  
+**Email**: [sudheeshtgowda@gmail.com]
 
 ---
 
@@ -178,14 +183,6 @@ ReachMe/
 
 ---
 
-## 📄 License
-
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for details.
+**Credits**: [As A Programmer](https://www.youtube.com/@asaprogrammer_)
 
 ---
-
-## 📬 Contact
-
-**Developer**: Sudheesh Thuralkalmakki Dharmappa Gowda  
-**GitHub**: [SudheeshTD](https://github.com/SudheeshTD)  
-**Email**: [sudheeshtgowda@gmail.com]
