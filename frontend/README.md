@@ -59,3 +59,10 @@ In Build Command:
 3. Build APplication and Make react optimized for the Produxtion
 
 LetzChat> openssl rand -base64 32 - to generate Secure JWT Secret
+
+PWA
+\frontend> npm install dexie dexie-react-hooks vite-plugin-pwa workbox-window
+
+frontend> npm install @uidotdev/usehooks
+
+\frontend> npm install vite-plugin-pwa vite-plugin-mkcert workbox-window --save-dev

@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.16",
+    "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.8.4",
+    "dexie": "^4.0.11",
+    "dexie-react-hooks": "^1.1.7",
     "letzchat": "file:..",
     "lucide-react": "^0.484.0",
     "react": "^19.0.0",
@@ -32,6 +35,9 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "vite": "^6.2.0"
+    "vite": "^6.2.0",
+    "vite-plugin-mkcert": "^1.17.8",
+    "vite-plugin-pwa": "^1.0.0",
+    "workbox-window": "^7.3.0"
   }
 }

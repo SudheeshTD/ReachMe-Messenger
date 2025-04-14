@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
+import { db } from "../lib/db";
 
 const BASE_URL =
   import.meta.env.MODE === "development" ? "http://localhost:5001" : "/";
@@ -14,30 +15,55 @@ export const useAuthStore = create((set, get) => ({
   isCheckingAuth: true,
   onlineUsers: [],
   socket: null,
+  isOnline: navigator.onLine,
+
+  // Add actions:
+  cacheUser: async (user) => {
+    await db.table("users").put(user);
+  },
+
+  getCachedUser: async () => {
+    return await db.table("users").toCollection().first();
+  },
+
+  // checkAuth: async () => {
+  //   try {
+  //     const res = await axiosInstance.get("/auth/check");
+
+  //     set({ authUser: res.data });
+  //     get().connectSocket();
+  //   } catch (error) {
+  //     console.log("Error in checkAuth:", error);
+  //     set({ authUser: null });
+  //   } finally {
+  //     set({ isCheckingAuth: false });
+  //   }
+  // },
 
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
-
+      await db.table("users").put(res.data); // Cache user
       set({ authUser: res.data });
       get().connectSocket();
     } catch (error) {
-      console.log("Error in checkAuth:", error);
-      set({ authUser: null });
+      const cachedUser = await db.table("users").toCollection().first();
+      set({ authUser: cachedUser || null }); // Fallback to cached
     } finally {
       set({ isCheckingAuth: false });
     }
   },
 
   signup: async (data) => {
-    set({ usSignUp: true });
+    set({ isSigningUp: true }); // Changed from usSignUp to isSigningUp
     try {
       const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data });
+      await db.table("users").put(res.data);
       toast.success("Account Created Successfully");
       get().connectSocket();
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Signup failed");
     } finally {
       set({ isSigningUp: false });
     }
@@ -59,6 +85,7 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data });
+      await db.table("users").put(res.data);
       toast.success("Login Successful");
 
       get().connectSocket();
@@ -73,7 +100,9 @@ export const useAuthStore = create((set, get) => ({
     set({ isUpdatingProfile: true });
     try {
       const res = await axiosInstance.put("/auth/update-profile", data);
-      set({ authUser: res.data });
+      const updatedUser = res.data;
+      set({ authUser: updatedUser });
+      await db.table("users").put(updatedUser); // Add this line
       toast.success("Profile Picture Updated successfully");
     } catch (error) {
       console.log("Error in uploading Profile:", error);

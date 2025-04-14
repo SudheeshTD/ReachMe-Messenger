@@ -170,9 +170,26 @@ export const updateProfile = async (req, res) => {
 //   }
 // };
 
-export const checkAuth = (req, res) => {
+export const checkAuth = async (req, res) => {
   try {
-    res.status(200).json(req.user);
+    // Initially, try to get fullName from the request's user object.
+    let fullName = req.user.fullName;
+
+    // If fullName is null or missing, query the database for it.
+    if (!fullName) {
+      const userFromDb = await User.findById(req.user._id, "fullName");
+      if (userFromDb) {
+        fullName = userFromDb.fullName;
+      }
+    }
+    const userData = {
+      _id: req.user._id,
+      fullName: req.user.fullName,
+      email: req.user.email,
+      profilePic: req.user.profilePic,
+      createdAt: req.user.createdAt,
+    };
+    res.status(200).json(userData);
   } catch (error) {
     console.log("Error in checkAuth controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
