@@ -2,7 +2,7 @@
 
 [![Deployed on Render](https://img.shields.io/badge/Render-Deployed-2B66F6)](https://render.com)
 
-**Reach Me Messenger** is a secure, real-time chat application designed for seamless instant messaging and media sharing. Built with the MERN stack and WebSocket technology, it offers a dynamic user experience with robust security, customizable themes, and cloud-based image storage. Ideal for both personal and professional communication, the app ensures messages are delivered instantly while prioritizing user privacy and data protection.
+**Reach Me Messenger** is a secure, real-time chat application designed for seamless instant messaging and media sharing. Built with the MERN stack and WebSocket technology, it offers a dynamic user experience with robust security, customizable themes, and cloud-based image storage. Ideal for both personal and professional communication, the app ensures messages are delivered instantly while prioritizing user privacy and data protection. Added Service workers to work applicaton as a PWA. Some features like offline Viewing, and adding message in queue to be sent when online is added.
 
 ## 📬 Contact
 
